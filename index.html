@@ -264,6 +264,10 @@ function boot() {
   line('  │  Press ↑ / ↓ to navigate history.           │', 'line-dim')
   line('  └─────────────────────────────────────────────┘', 'line-dim')
   blank()
+  // sticky header marker — clear() stops here
+  const hdr = document.createElement('div')
+  hdr.id = 'header-end'
+  term.appendChild(hdr)
   scroll()
 }
 
@@ -436,7 +440,14 @@ const COMMANDS = {
   },
 
   clear() {
-    term.innerHTML = ''
+    const marker = document.getElementById('header-end')
+    if (!marker) { term.innerHTML = ''; return }
+    let node = marker.nextSibling
+    while (node) {
+      const next = node.nextSibling
+      term.removeChild(node)
+      node = next
+    }
   },
 }
 
