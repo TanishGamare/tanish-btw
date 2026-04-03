@@ -1,4 +1,4 @@
-This Repo is for deploying my Protfolio  
+# [tanish-btw](tanishbtw.me)
 
+### This is my personal portfolio do checkout to contact me or just to see my works 
 
-[tanish-btw](tanishbtw.me)
