@@ -165,36 +165,8 @@
         }
         
         /* Staggered animation for skill cards */
-        .skill-card:nth-child(1) {
-            animation: slideInLeft 0.6s ease-out 0.1s both;
-        }
-        
-        .skill-card:nth-child(2) {
-            animation: slideInLeft 0.6s ease-out 0.2s both;
-        }
-        
-        .skill-card:nth-child(3) {
-            animation: slideInLeft 0.6s ease-out 0.3s both;
-        }
-        
-        .skill-card:nth-child(4) {
-            animation: slideInLeft 0.6s ease-out 0.4s both;
-        }
-        
-        .skill-card:nth-child(5) {
-            animation: slideInLeft 0.6s ease-out 0.1s both;
-        }
-        
-        .skill-card:nth-child(6) {
-            animation: slideInLeft 0.6s ease-out 0.2s both;
-        }
-        
-        .skill-card:nth-child(7) {
-            animation: slideInLeft 0.6s ease-out 0.3s both;
-        }
-        
-        .skill-card:nth-child(8) {
-            animation: slideInLeft 0.6s ease-out 0.4s both;
+        .skill-card {
+            opacity: 0;
         }
         
         /* Button ripple effect */
@@ -1078,7 +1050,10 @@ Audio (Web Audio API singleton)</pre>
                     } else if (element.classList.contains('project-card')) {
                         element.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s forwards`;
                     } else if (element.classList.contains('skill-card')) {
-                        element.style.animation = `slideInLeft 0.6s ease-out forwards`;
+                        // Get the parent container to determine position
+                        const parent = element.parentElement;
+                        const skillIndex = Array.from(parent.children).indexOf(element);
+                        element.style.animation = `slideInLeft 0.6s ease-out ${skillIndex * 0.1}s forwards`;
                     }
                     observer.unobserve(element);
                 }
@@ -1087,7 +1062,6 @@ Audio (Web Audio API singleton)</pre>
         
         // Observe all animatable elements
         document.querySelectorAll('.timeline-item, .project-card, .skill-card').forEach(el => {
-            el.style.opacity = '0';
             observer.observe(el);
         });
         
