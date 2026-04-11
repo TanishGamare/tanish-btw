@@ -37,6 +37,30 @@
                         underline: {
                             'from': { 'background-position': '100% 0' },
                             'to': { 'background-position': '0 0' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        pulse: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.8' }
+                        },
+                        glow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)' },
+                            '50%': { boxShadow: '0 0 40px rgba(6, 182, 212, 0.6)' }
+                        },
+                        slideInLeft: {
+                            'from': { opacity: '0', transform: 'translateX(-30px)' },
+                            'to': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        slideInRight: {
+                            'from': { opacity: '0', transform: 'translateX(30px)' },
+                            'to': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        spin: {
+                            'from': { transform: 'rotate(0deg)' },
+                            'to': { transform: 'rotate(360deg)' }
                         }
                     }
                 }
@@ -128,6 +152,137 @@
         html {
             scroll-behavior: smooth;
         }
+        
+        /* Profile image animation */
+        .profile-image {
+            @apply w-48 h-48 rounded-2xl object-cover ring-4 ring-cyan-500/30 dark:ring-cyan-500/50 animate-float;
+            filter: drop-shadow(0 0 30px rgba(6, 182, 212, 0.3));
+            animation: float 3s ease-in-out infinite, glow 3s ease-in-out infinite;
+        }
+        
+        .profile-image:hover {
+            filter: drop-shadow(0 0 50px rgba(6, 182, 212, 0.6));
+        }
+        
+        /* Staggered animation for skill cards */
+        .skill-card:nth-child(1) {
+            animation: slideInLeft 0.6s ease-out 0.1s both;
+        }
+        
+        .skill-card:nth-child(2) {
+            animation: slideInLeft 0.6s ease-out 0.2s both;
+        }
+        
+        .skill-card:nth-child(3) {
+            animation: slideInLeft 0.6s ease-out 0.3s both;
+        }
+        
+        .skill-card:nth-child(4) {
+            animation: slideInLeft 0.6s ease-out 0.4s both;
+        }
+        
+        .skill-card:nth-child(5) {
+            animation: slideInLeft 0.6s ease-out 0.1s both;
+        }
+        
+        .skill-card:nth-child(6) {
+            animation: slideInLeft 0.6s ease-out 0.2s both;
+        }
+        
+        .skill-card:nth-child(7) {
+            animation: slideInLeft 0.6s ease-out 0.3s both;
+        }
+        
+        .skill-card:nth-child(8) {
+            animation: slideInLeft 0.6s ease-out 0.4s both;
+        }
+        
+        /* Button ripple effect */
+        .btn-accent, .btn-primary {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-accent::after, .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        .btn-accent:active::after, .btn-primary:active::after {
+            animation: ripple 0.6s ease-out;
+        }
+        
+        @keyframes ripple {
+            from {
+                width: 0;
+                height: 0;
+            }
+            to {
+                width: 300px;
+                height: 300px;
+            }
+        }
+        
+        /* Project card stagger */
+        .project-card {
+            animation: fadeInUp 0.6s ease-out both;
+        }
+        
+        .project-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        
+        .project-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+        
+        /* Text fade-in on scroll */
+        .text-reveal {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* Floating icon animation */
+        .floating-icon {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Gradient text animation */
+        .gradient-text {
+            background: linear-gradient(90deg, #06b6d4, #f97316, #06b6d4);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 4s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+        
+        /* Loading shimmer for gallery items */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100">
@@ -158,59 +313,71 @@
     
     <!-- ============ HERO SECTION ============ -->
     <section id="hero" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div class="space-y-6 animate-fade-in-up">
-            <div>
-                <h1 class="text-5xl md:text-6xl font-bold mb-3">Tanish Gamare</h1>
-                <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
-                    A B.Sc. IT student from Mumbai building things with Python. Currently learning Docker & exploring the edge between data + systems.
-                </p>
-            </div>
-            
-            <!-- Currently Building -->
-            <div class="bg-cyan-50 dark:bg-slate-800/50 border-l-4 border-cyan-500 p-4 rounded">
-                <div class="font-mono text-sm text-cyan-600 dark:text-cyan-400 font-semibold">Currently Building:</div>
-                <div class="font-mono text-sm text-slate-700 dark:text-slate-300 mt-1">
-                    Docker deep dive • MongoDB • React patterns
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <!-- Text Content -->
+            <div class="space-y-6 animate-fade-in-up">
+                <div>
+                    <h1 class="text-5xl md:text-6xl font-bold mb-3">Tanish Gamare</h1>
+                    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
+                        A B.Sc. IT student from Mumbai building things with Python. Currently learning Docker & exploring the edge between data + systems.
+                    </p>
                 </div>
-                <div class="font-mono text-xs text-slate-500 dark:text-slate-400 mt-2">
-                    Last built: BRUTASK (React 18 task manager)
+                
+                <!-- Currently Building -->
+                <div class="bg-cyan-50 dark:bg-slate-800/50 border-l-4 border-cyan-500 p-4 rounded animate-pulse">
+                    <div class="font-mono text-sm text-cyan-600 dark:text-cyan-400 font-semibold">Currently Building:</div>
+                    <div class="font-mono text-sm text-slate-700 dark:text-slate-300 mt-1">
+                        Docker deep dive • MongoDB • React patterns
+                    </div>
+                    <div class="font-mono text-xs text-slate-500 dark:text-slate-400 mt-2">
+                        Last built: BRUTASK (React 18 task manager)
+                    </div>
+                </div>
+                
+                <!-- Status Badge -->
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-green-100 dark:bg-green-900/30 rounded-full">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-xs font-mono text-green-700 dark:text-green-400">Available / Open to opportunities</span>
+                    </div>
+                </div>
+                
+                <!-- CTAs -->
+                <div class="flex gap-4 pt-4 flex-wrap">
+                    <a href="resume.pdf" download class="btn-primary group">
+                        <span class="group-hover:animate-bounce">↓</span>
+                        <span>Download Resume</span>
+                    </a>
+                    <a href="#contact" class="btn-accent group">
+                        <span class="group-hover:translate-x-1 transition-transform">→</span>
+                        <span>Get In Touch</span>
+                    </a>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="flex gap-4 pt-4 flex-wrap">
+                    <a href="https://github.com/tanishbtw" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-cyan-500 transition-all hover:scale-110 transform">
+                        <span class="font-mono text-sm">GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/tanishgarame" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-cyan-500 transition-all hover:scale-110 transform">
+                        <span class="font-mono text-sm">LinkedIn</span>
+                    </a>
+                    <a href="https://twitter.com/tanishbtw" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-cyan-500 transition-all hover:scale-110 transform">
+                        <span class="font-mono text-sm">Twitter</span>
+                    </a>
+                    <a href="mailto:hello@tanish.dev" class="text-slate-500 hover:text-cyan-500 transition-all hover:scale-110 transform">
+                        <span class="font-mono text-sm">Email</span>
+                    </a>
                 </div>
             </div>
             
-            <!-- Status Badge -->
-            <div class="flex items-center gap-3">
-                <div class="flex items-center gap-2 px-3 py-1.5 bg-green-100 dark:bg-green-900/30 rounded-full">
-                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span class="text-xs font-mono text-green-700 dark:text-green-400">Available / Open to opportunities</span>
+            <!-- Profile Image -->
+            <div class="flex justify-center items-center md:order-last">
+                <div class="relative">
+                    <!-- Animated background circles -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-orange-500/20 rounded-3xl blur-3xl animate-pulse"></div>
+                    <img src="ichigoat.jpeg" alt="Tanish - Developer with headphones" class="profile-image relative z-10 shadow-2xl">
                 </div>
-            </div>
-            
-            <!-- CTAs -->
-            <div class="flex gap-4 pt-4">
-                <a href="resume.pdf" download class="btn-primary">
-                    <span>↓</span>
-                    <span>Download Resume</span>
-                </a>
-                <a href="#contact" class="btn-accent">
-                    <span>→</span>
-                    <span>Get In Touch</span>
-                </a>
-            </div>
-            
-            <!-- Social Links -->
-            <div class="flex gap-4 pt-4">
-                <a href="https://github.com/tanishbtw" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-cyan-500 transition-colors">
-                    <span class="font-mono text-sm">GitHub</span>
-                </a>
-                <a href="https://linkedin.com/in/tanishgarame" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-cyan-500 transition-colors">
-                    <span class="font-mono text-sm">LinkedIn</span>
-                </a>
-                <a href="https://twitter.com/tanishbtw" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-cyan-500 transition-colors">
-                    <span class="font-mono text-sm">Twitter</span>
-                </a>
-                <a href="mailto:hello@tanish.dev" class="text-slate-500 hover:text-cyan-500 transition-colors">
-                    <span class="font-mono text-sm">Email</span>
-                </a>
             </div>
         </div>
     </section>
@@ -662,54 +829,54 @@ Audio (Web Audio API singleton)</pre>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Project Card 1 -->
-                <div class="project-card glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg">
-                    <h4 class="font-bold text-lg mb-2">Project Template</h4>
+                <div class="project-card glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 group">
+                    <h4 class="font-bold text-lg mb-2 group-hover:text-cyan-500 transition-colors">Project Template</h4>
                     <p class="italic text-slate-600 dark:text-slate-400 text-sm mb-4">"Your next project description"</p>
                     <div class="mb-4">
                         <div class="font-mono text-xs text-slate-500 dark:text-slate-400 mb-2">Tech</div>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded">[Tag1]</span>
-                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded">[Tag2]</span>
+                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded hover:bg-cyan-500 hover:text-white transition-all transform hover:scale-110">[Tag1]</span>
+                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded hover:bg-cyan-500 hover:text-white transition-all transform hover:scale-110">[Tag2]</span>
                         </div>
                     </div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Quick description (1-2 sentences) of what this project does.</p>
-                    <div class="flex gap-3">
+                    <div class="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <a href="#" class="btn-accent text-xs">View</a>
                         <a href="#" class="btn-accent text-xs">Code</a>
                     </div>
                 </div>
                 
                 <!-- Project Card 2 -->
-                <div class="project-card glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg">
-                    <h4 class="font-bold text-lg mb-2">Project Template</h4>
+                <div class="project-card glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 group">
+                    <h4 class="font-bold text-lg mb-2 group-hover:text-cyan-500 transition-colors">Project Template</h4>
                     <p class="italic text-slate-600 dark:text-slate-400 text-sm mb-4">"Your next project description"</p>
                     <div class="mb-4">
                         <div class="font-mono text-xs text-slate-500 dark:text-slate-400 mb-2">Tech</div>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded">[Tag1]</span>
-                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded">[Tag2]</span>
+                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded hover:bg-cyan-500 hover:text-white transition-all transform hover:scale-110">[Tag1]</span>
+                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded hover:bg-cyan-500 hover:text-white transition-all transform hover:scale-110">[Tag2]</span>
                         </div>
                     </div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Quick description (1-2 sentences) of what this project does.</p>
-                    <div class="flex gap-3">
+                    <div class="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <a href="#" class="btn-accent text-xs">View</a>
                         <a href="#" class="btn-accent text-xs">Code</a>
                     </div>
                 </div>
                 
                 <!-- Project Card 3 -->
-                <div class="project-card glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg">
-                    <h4 class="font-bold text-lg mb-2">Project Template</h4>
+                <div class="project-card glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 group">
+                    <h4 class="font-bold text-lg mb-2 group-hover:text-cyan-500 transition-colors">Project Template</h4>
                     <p class="italic text-slate-600 dark:text-slate-400 text-sm mb-4">"Your next project description"</p>
                     <div class="mb-4">
                         <div class="font-mono text-xs text-slate-500 dark:text-slate-400 mb-2">Tech</div>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded">[Tag1]</span>
-                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded">[Tag2]</span>
+                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded hover:bg-cyan-500 hover:text-white transition-all transform hover:scale-110">[Tag1]</span>
+                            <span class="px-2 py-1 bg-slate-200 dark:bg-slate-700 font-mono text-xs rounded hover:bg-cyan-500 hover:text-white transition-all transform hover:scale-110">[Tag2]</span>
                         </div>
                     </div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Quick description (1-2 sentences) of what this project does.</p>
-                    <div class="flex gap-3">
+                    <div class="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <a href="#" class="btn-accent text-xs">View</a>
                         <a href="#" class="btn-accent text-xs">Code</a>
                     </div>
@@ -724,8 +891,8 @@ Audio (Web Audio API singleton)</pre>
         
         <!-- Featured Post -->
         <div class="mb-12">
-            <div class="glass border border-slate-200 dark:border-slate-700 p-8 rounded-lg">
-                <h3 class="text-2xl font-bold mb-2">How I Debugged MongoDB Exit Code 139</h3>
+            <div class="glass border border-slate-200 dark:border-slate-700 p-8 rounded-lg hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 group">
+                <h3 class="text-2xl font-bold mb-2 group-hover:text-cyan-500 transition-colors">How I Debugged MongoDB Exit Code 139</h3>
                 <div class="flex gap-4 text-sm text-slate-500 dark:text-slate-400 font-mono mb-4">
                     <span>8 min read</span>
                     <span>•</span>
@@ -734,7 +901,10 @@ Audio (Web Audio API singleton)</pre>
                 <p class="text-slate-700 dark:text-slate-300 mb-6">
                     When my MongoDB container kept crashing with exit code 139, I learned about signal handling, memory management, and Docker networking. This post walks through the debugging journey and the key insights that fixed it.
                 </p>
-                <a href="#" class="btn-accent">Read More →</a>
+                <a href="#" class="btn-accent group/btn inline-block">
+                    <span>→</span>
+                    <span>Read More</span>
+                </a>
             </div>
         </div>
         
@@ -743,27 +913,27 @@ Audio (Web Audio API singleton)</pre>
             <h3 class="font-mono text-sm uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-8 font-semibold">Other Posts</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Post 1 -->
-                <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg">
-                    <h4 class="font-bold mb-1">Why HTML5 Drag API Sucks</h4>
+                <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 group hover:shadow-lg">
+                    <h4 class="font-bold mb-1 group-hover:text-cyan-500 transition-colors">Why HTML5 Drag API Sucks</h4>
                     <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-3">(5 min read)</div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">A brief rant on why I rewrote BRUTASK's drag-and-drop with mouse events instead.</p>
-                    <a href="#" class="btn-accent text-xs">Read →</a>
+                    <a href="#" class="btn-accent text-xs opacity-0 group-hover:opacity-100 transition-opacity">Read →</a>
                 </div>
                 
                 <!-- Post 2 -->
-                <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg">
-                    <h4 class="font-bold mb-1">React State Management: The Hard Way</h4>
+                <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 group hover:shadow-lg">
+                    <h4 class="font-bold mb-1 group-hover:text-cyan-500 transition-colors">React State Management: The Hard Way</h4>
                     <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-3">(7 min read)</div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Lessons learned building BRUTASK v2 and fixing theme switching across component trees.</p>
-                    <a href="#" class="btn-accent text-xs">Read →</a>
+                    <a href="#" class="btn-accent text-xs opacity-0 group-hover:opacity-100 transition-opacity">Read →</a>
                 </div>
                 
                 <!-- Post 3 -->
-                <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg">
-                    <h4 class="font-bold mb-1">Building BRUTASK: Lessons Learned</h4>
+                <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 group hover:shadow-lg">
+                    <h4 class="font-bold mb-1 group-hover:text-cyan-500 transition-colors">Building BRUTASK: Lessons Learned</h4>
                     <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-3">(6 min read)</div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">A deep dive into the architecture, design decisions, and challenges of building a production Pomodoro app.</p>
-                    <a href="#" class="btn-accent text-xs">Read →</a>
+                    <a href="#" class="btn-accent text-xs opacity-0 group-hover:opacity-100 transition-opacity">Read →</a>
                 </div>
             </div>
         </div>
@@ -779,31 +949,31 @@ Audio (Web Audio API singleton)</pre>
         
         <!-- Quick Contact Options -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg text-center">
-                <div class="font-bold mb-3">Quick Call</div>
+            <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg text-center hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg group">
+                <div class="font-bold mb-3 group-hover:text-cyan-500 transition-colors text-lg">📅 Quick Call</div>
                 <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Schedule a 15-minute conversation</p>
-                <a href="mailto:hello@tanish.dev?subject=Let%27s%20Schedule%20a%20Quick%20Call" class="btn-accent text-sm inline-flex">
-                    <span>📅</span>
+                <a href="mailto:hello@tanish.dev?subject=Let%27s%20Schedule%20a%20Quick%20Call" class="btn-accent text-sm inline-flex group/btn">
+                    <span class="group-hover/btn:animate-bounce">📅</span>
                     <span>Email to Schedule</span>
                 </a>
             </div>
             
-            <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg text-center">
-                <div class="font-bold mb-3">Direct Message</div>
+            <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg text-center hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg group">
+                <div class="font-bold mb-3 group-hover:text-cyan-500 transition-colors text-lg">💬 Direct Message</div>
                 <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Send me a message on any platform</p>
                 <div class="flex gap-2 justify-center">
-                    <a href="https://twitter.com/tanishbtw" target="_blank" rel="noopener noreferrer" class="btn-accent text-sm">
-                        <span>→</span>
+                    <a href="https://twitter.com/tanishbtw" target="_blank" rel="noopener noreferrer" class="btn-accent text-sm group/btn">
+                        <span class="group-hover/btn:translate-x-0.5 transition-transform">→</span>
                         <span>Twitter</span>
                     </a>
                 </div>
             </div>
             
-            <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg text-center">
-                <div class="font-bold mb-3">Send Email</div>
+            <div class="glass border border-slate-200 dark:border-slate-700 p-6 rounded-lg text-center hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg group">
+                <div class="font-bold mb-3 group-hover:text-cyan-500 transition-colors text-lg">✉️ Send Email</div>
                 <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Professional inquiries welcome</p>
-                <a href="mailto:hello@tanish.dev" class="btn-accent text-sm inline-flex">
-                    <span>✉</span>
+                <a href="mailto:hello@tanish.dev" class="btn-accent text-sm inline-flex group/btn">
+                    <span class="group-hover/btn:animate-bounce">✉️</span>
                     <span>Email Me</span>
                 </a>
             </div>
@@ -892,24 +1062,114 @@ Audio (Web Audio API singleton)</pre>
             });
         }
         
-        // Smooth scroll reveal for timeline items
+        // Enhanced Intersection Observer for smooth scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
         
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
-                    observer.unobserve(entry.target);
+                    // Determine animation based on element type
+                    const element = entry.target;
+                    if (element.classList.contains('timeline-item')) {
+                        element.style.animation = `slideInLeft 0.6s ease-out ${index * 0.1}s forwards`;
+                    } else if (element.classList.contains('project-card')) {
+                        element.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s forwards`;
+                    } else if (element.classList.contains('skill-card')) {
+                        element.style.animation = `slideInLeft 0.6s ease-out forwards`;
+                    }
+                    observer.unobserve(element);
                 }
             });
         }, observerOptions);
         
+        // Observe all animatable elements
         document.querySelectorAll('.timeline-item, .project-card, .skill-card').forEach(el => {
             el.style.opacity = '0';
             observer.observe(el);
+        });
+        
+        // Parallax effect on hero section
+        const heroSection = document.getElementById('hero');
+        window.addEventListener('scroll', () => {
+            if (heroSection) {
+                const scrollY = window.scrollY;
+                const elements = heroSection.querySelectorAll('.profile-image');
+                elements.forEach(el => {
+                    el.style.transform = `translateY(${scrollY * 0.3}px)`;
+                });
+            }
+        });
+        
+        // Add interactive glow effect to buttons on hover
+        const buttons = document.querySelectorAll('.btn-accent, .btn-primary');
+        buttons.forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                button.style.setProperty('--x', x + 'px');
+                button.style.setProperty('--y', y + 'px');
+            });
+        });
+        
+        // Animate numbers on scroll (for stats)
+        const animateNumbers = () => {
+            const numberElements = document.querySelectorAll('[data-number]');
+            numberElements.forEach(element => {
+                const targetNumber = parseInt(element.getAttribute('data-number'));
+                const duration = 2000;
+                const start = 0;
+                const increment = targetNumber / (duration / 16);
+                
+                let current = start;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= targetNumber) {
+                        element.textContent = targetNumber;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                }, 16);
+            });
+        };
+        
+        // Trigger animations when section comes into view
+        const triggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    triggerObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('section').forEach(section => {
+            triggerObserver.observe(section);
+        });
+        
+        // Smooth scroll to anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add fade-in animation to all sections
+        window.addEventListener('load', () => {
+            document.querySelectorAll('section').forEach((section, index) => {
+                section.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s both`;
+            });
         });
     </script>
 </body>
