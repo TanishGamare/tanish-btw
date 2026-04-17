@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tanish Gamare - Developer Portfolio</title>
     
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Using system fonts from design tokens -->
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,8 +21,8 @@
                         },
                     },
                     fontFamily: {
-                        mono: ['"Fira Code"', 'monospace'],
-                        sans: ['Montserrat', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+                        sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
                     },
                     animation: {
                         'fade-in-up': 'fadeInUp 0.6s ease-out',
@@ -47,8 +46,8 @@
                             '50%': { opacity: '0.8' }
                         },
                         glow: {
-                            '0%, 100%': { boxShadow: '0 0 20px rgba(6, 182, 212, 0.3)' },
-                            '50%': { boxShadow: '0 0 40px rgba(6, 182, 212, 0.6)' }
+                            '0%, 100%': { boxShadow: '0 0 16px color-mix(in srgb, var(--primary) 35%, transparent)' },
+                            '50%': { boxShadow: '0 0 30px color-mix(in srgb, var(--primary) 55%, transparent)' }
                         },
                         slideInLeft: {
                             'from': { opacity: '0', transform: 'translateX(-30px)' },
@@ -70,81 +69,111 @@
     
     <style>
         :root {
-            --background: oklch(0.9578 0.0058 264.5321);
-            --foreground: oklch(0.4355 0.0430 279.3250);
-            --card: oklch(1.0000 0 0);
-            --card-foreground: oklch(0.4355 0.0430 279.3250);
-            --popover: oklch(0.8575 0.0145 268.4756);
-            --popover-foreground: oklch(0.4355 0.0430 279.3250);
-            --primary: oklch(0.5547 0.2503 297.0156);
+            --background: oklch(0.9821 0 0);
+            --foreground: oklch(0.2435 0 0);
+            --card: oklch(0.9911 0 0);
+            --card-foreground: oklch(0.2435 0 0);
+            --popover: oklch(0.9911 0 0);
+            --popover-foreground: oklch(0.2435 0 0);
+            --primary: oklch(0.4341 0.0392 41.9938);
             --primary-foreground: oklch(1.0000 0 0);
-            --secondary: oklch(0.8575 0.0145 268.4756);
-            --secondary-foreground: oklch(0.4355 0.0430 279.3250);
-            --muted: oklch(0.9060 0.0117 264.5071);
-            --muted-foreground: oklch(0.5471 0.0343 279.0837);
-            --accent: oklch(0.6820 0.1448 235.3822);
-            --accent-foreground: oklch(1.0000 0 0);
-            --destructive: oklch(0.5505 0.2155 19.8095);
+            --secondary: oklch(0.9200 0.0651 74.3695);
+            --secondary-foreground: oklch(0.3499 0.0685 40.8288);
+            --muted: oklch(0.9521 0 0);
+            --muted-foreground: oklch(0.5032 0 0);
+            --accent: oklch(0.9310 0 0);
+            --accent-foreground: oklch(0.2435 0 0);
+            --destructive: oklch(0.6271 0.1936 33.3390);
             --destructive-foreground: oklch(1.0000 0 0);
-            --border: oklch(0.8083 0.0174 271.1982);
-            --input: oklch(0.8575 0.0145 268.4756);
-            --ring: oklch(0.5547 0.2503 297.0156);
-            --chart-1: oklch(0.5547 0.2503 297.0156);
-            --chart-2: oklch(0.6820 0.1448 235.3822);
-            --chart-3: oklch(0.6250 0.1772 140.4448);
-            --chart-4: oklch(0.6920 0.2041 42.4293);
-            --chart-5: oklch(0.7141 0.1045 33.0967);
-            --sidebar: oklch(0.9335 0.0087 264.5206);
-            --sidebar-foreground: oklch(0.4355 0.0430 279.3250);
-            --sidebar-primary: oklch(0.5547 0.2503 297.0156);
-            --sidebar-primary-foreground: oklch(1.0000 0 0);
-            --sidebar-accent: oklch(0.6820 0.1448 235.3822);
-            --sidebar-accent-foreground: oklch(1.0000 0 0);
-            --sidebar-border: oklch(0.8083 0.0174 271.1982);
-            --sidebar-ring: oklch(0.5547 0.2503 297.0156);
-            --font-sans: Montserrat, sans-serif;
-            --font-serif: Georgia, serif;
-            --font-mono: "Fira Code", monospace;
-            --radius: 0.35rem;
-            --shadow-sm: 0px 4px 6px 0px hsl(240 30% 25% / 0.12), 0px 1px 2px -1px hsl(240 30% 25% / 0.12);
-            --shadow-md: 0px 4px 6px 0px hsl(240 30% 25% / 0.12), 0px 2px 4px -1px hsl(240 30% 25% / 0.12);
-            --shadow-lg: 0px 4px 6px 0px hsl(240 30% 25% / 0.12), 0px 4px 6px -1px hsl(240 30% 25% / 0.12);
-            --shadow-xl: 0px 4px 6px 0px hsl(240 30% 25% / 0.12), 0px 8px 10px -1px hsl(240 30% 25% / 0.12);
+            --border: oklch(0.8822 0 0);
+            --input: oklch(0.8822 0 0);
+            --ring: oklch(0.4341 0.0392 41.9938);
+            --chart-1: oklch(0.4341 0.0392 41.9938);
+            --chart-2: oklch(0.9200 0.0651 74.3695);
+            --chart-3: oklch(0.9310 0 0);
+            --chart-4: oklch(0.9367 0.0523 75.5009);
+            --chart-5: oklch(0.4338 0.0437 41.6746);
+            --sidebar: oklch(0.9881 0 0);
+            --sidebar-foreground: oklch(0.2645 0 0);
+            --sidebar-primary: oklch(0.3250 0 0);
+            --sidebar-primary-foreground: oklch(0.9881 0 0);
+            --sidebar-accent: oklch(0.9761 0 0);
+            --sidebar-accent-foreground: oklch(0.3250 0 0);
+            --sidebar-border: oklch(0.9401 0 0);
+            --sidebar-ring: oklch(0.7731 0 0);
+            --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --radius: 0.5rem;
+            --shadow-x: 0;
+            --shadow-y: 1px;
+            --shadow-blur: 3px;
+            --shadow-spread: 0px;
+            --shadow-opacity: 0.1;
+            --shadow-color: oklch(0 0 0);
+            --shadow-2xs: 0 1px 3px 0 hsl(0 0% 0% / 0.05);
+            --shadow-xs: 0 1px 3px 0 hsl(0 0% 0% / 0.05);
+            --shadow-sm: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+            --shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+            --shadow-md: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+            --shadow-lg: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
+            --shadow-xl: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
+            --shadow-2xl: 0 1px 3px 0 hsl(0 0% 0% / 0.25);
+            --tracking-normal: 0em;
+            --spacing: 0.25rem;
         }
 
         .dark {
-            --background: oklch(0.2155 0.0254 284.0647);
-            --foreground: oklch(0.8787 0.0426 272.2767);
-            --card: oklch(0.2429 0.0304 283.9110);
-            --card-foreground: oklch(0.8787 0.0426 272.2767);
-            --popover: oklch(0.4037 0.0320 280.1520);
-            --popover-foreground: oklch(0.8787 0.0426 272.2767);
-            --primary: oklch(0.7871 0.1187 304.7693);
-            --primary-foreground: oklch(0.2429 0.0304 283.9110);
-            --secondary: oklch(0.4765 0.0340 278.6430);
-            --secondary-foreground: oklch(0.8787 0.0426 272.2767);
-            --muted: oklch(0.2973 0.0294 276.2144);
-            --muted-foreground: oklch(0.7510 0.0396 273.9320);
-            --accent: oklch(0.8467 0.0833 210.2545);
-            --accent-foreground: oklch(0.2429 0.0304 283.9110);
-            --destructive: oklch(0.7556 0.1297 2.7642);
-            --destructive-foreground: oklch(0.2429 0.0304 283.9110);
-            --border: oklch(0.3240 0.0319 281.9784);
-            --input: oklch(0.3240 0.0319 281.9784);
-            --ring: oklch(0.7871 0.1187 304.7693);
-            --chart-1: oklch(0.7871 0.1187 304.7693);
-            --chart-2: oklch(0.8467 0.0833 210.2545);
-            --chart-3: oklch(0.8577 0.1092 142.7153);
-            --chart-4: oklch(0.8237 0.1015 52.6294);
-            --chart-5: oklch(0.9226 0.0238 30.4919);
-            --sidebar: oklch(0.1828 0.0204 284.2039);
-            --sidebar-foreground: oklch(0.8787 0.0426 272.2767);
-            --sidebar-primary: oklch(0.7871 0.1187 304.7693);
-            --sidebar-primary-foreground: oklch(0.2429 0.0304 283.9110);
-            --sidebar-accent: oklch(0.8467 0.0833 210.2545);
-            --sidebar-accent-foreground: oklch(0.2429 0.0304 283.9110);
-            --sidebar-border: oklch(0.4037 0.0320 280.1520);
-            --sidebar-ring: oklch(0.7871 0.1187 304.7693);
+            --background: oklch(0.1776 0 0);
+            --foreground: oklch(0.9491 0 0);
+            --card: oklch(0.2134 0 0);
+            --card-foreground: oklch(0.9491 0 0);
+            --popover: oklch(0.2134 0 0);
+            --popover-foreground: oklch(0.9491 0 0);
+            --primary: oklch(0.9247 0.0524 66.1732);
+            --primary-foreground: oklch(0.2029 0.0240 200.1962);
+            --secondary: oklch(0.3163 0.0190 63.6992);
+            --secondary-foreground: oklch(0.9247 0.0524 66.1732);
+            --muted: oklch(0.2520 0 0);
+            --muted-foreground: oklch(0.7699 0 0);
+            --accent: oklch(0.2850 0 0);
+            --accent-foreground: oklch(0.9491 0 0);
+            --destructive: oklch(0.6271 0.1936 33.3390);
+            --destructive-foreground: oklch(1.0000 0 0);
+            --border: oklch(0.2351 0.0115 91.7467);
+            --input: oklch(0.4017 0 0);
+            --ring: oklch(0.9247 0.0524 66.1732);
+            --chart-1: oklch(0.9247 0.0524 66.1732);
+            --chart-2: oklch(0.3163 0.0190 63.6992);
+            --chart-3: oklch(0.2850 0 0);
+            --chart-4: oklch(0.3481 0.0219 67.0001);
+            --chart-5: oklch(0.9245 0.0533 67.0855);
+            --sidebar: oklch(0.2103 0.0059 285.8852);
+            --sidebar-foreground: oklch(0.9674 0.0013 286.3752);
+            --sidebar-primary: oklch(0.4882 0.2172 264.3763);
+            --sidebar-primary-foreground: oklch(1.0000 0 0);
+            --sidebar-accent: oklch(0.2739 0.0055 286.0326);
+            --sidebar-accent-foreground: oklch(0.9674 0.0013 286.3752);
+            --sidebar-border: oklch(0.2739 0.0055 286.0326);
+            --sidebar-ring: oklch(0.8711 0.0055 286.2860);
+            --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --radius: 0.5rem;
+            --shadow-x: 0;
+            --shadow-y: 1px;
+            --shadow-blur: 3px;
+            --shadow-spread: 0px;
+            --shadow-opacity: 0.1;
+            --shadow-color: oklch(0 0 0);
+            --shadow-2xs: 0 1px 3px 0 hsl(0 0% 0% / 0.05);
+            --shadow-xs: 0 1px 3px 0 hsl(0 0% 0% / 0.05);
+            --shadow-sm: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+            --shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
+            --shadow-md: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 2px 4px -1px hsl(0 0% 0% / 0.10);
+            --shadow-lg: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 4px 6px -1px hsl(0 0% 0% / 0.10);
+            --shadow-xl: 0 1px 3px 0 hsl(0 0% 0% / 0.10), 0 8px 10px -1px hsl(0 0% 0% / 0.10);
+            --shadow-2xl: 0 1px 3px 0 hsl(0 0% 0% / 0.25);
         }
 
         * {
@@ -163,34 +192,69 @@
             font-family: var(--font-mono) !important;
         }
 
-        [class*="text-slate-"] { color: var(--muted-foreground) !important; }
-        [class*="dark:text-slate-"] { color: var(--muted-foreground) !important; }
-        [class*="bg-slate-"], [class*="bg-white"] { background-color: var(--card) !important; }
-        [class*="border-slate-"] { border-color: var(--border) !important; }
-        [class*="text-cyan-"], [class*="hover:text-cyan-"] { color: var(--accent) !important; }
-        [class*="bg-cyan-"], [class*="hover:bg-cyan-"] { background-color: var(--accent) !important; }
-        [class*="border-cyan-"] { border-color: var(--accent) !important; }
-        [class*="bg-orange-"], [class*="hover:bg-orange-"] { background-color: var(--primary) !important; }
-        [class*="text-orange-"] { color: var(--primary) !important; }
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid var(--ring);
+            outline-offset: 2px;
+        }
+
+        /* Tailwind class bridges for consistent tokenized palette */
+        .text-slate-900, .text-slate-700, .dark .dark\:text-slate-100, .dark .dark\:text-slate-300 {
+            color: var(--foreground) !important;
+        }
+        .text-slate-600, .text-slate-500, .dark .dark\:text-slate-400 {
+            color: var(--muted-foreground) !important;
+        }
+        .bg-white, .bg-slate-50, .bg-slate-100, .bg-slate-200, .dark .dark\:bg-slate-700, .dark .dark\:bg-slate-800 {
+            background-color: var(--card) !important;
+        }
+        .border-slate-200, .border-slate-300, .dark .dark\:border-slate-700, .dark .dark\:border-slate-600 {
+            border-color: var(--border) !important;
+        }
+        .text-cyan-500, .text-cyan-600, .dark .dark\:text-cyan-400, .hover\:text-cyan-500:hover, .group:hover .group-hover\:text-cyan-500 {
+            color: var(--primary) !important;
+        }
+        .bg-cyan-50, .hover\:bg-cyan-500:hover, .group:hover .group-hover\:bg-cyan-500 {
+            background-color: var(--accent) !important;
+        }
+        .border-cyan-500, .hover\:border-cyan-500\/50:hover, .dark .dark\:hover\:border-cyan-500\/50:hover {
+            border-color: var(--primary) !important;
+        }
+        .bg-orange-500, .hover\:bg-orange-600:hover {
+            background-color: var(--primary) !important;
+            color: var(--primary-foreground) !important;
+        }
+        .bg-green-100, .dark .dark\:bg-green-900\/30 {
+            background-color: color-mix(in srgb, var(--secondary) 45%, transparent) !important;
+        }
+        .text-green-700, .dark .dark\:text-green-400, .bg-green-500 {
+            color: var(--secondary-foreground) !important;
+        }
+        .text-red-500 {
+            color: var(--destructive) !important;
+        }
         
         /* Subtle background patterns */
         body {
             background-image: 
-                linear-gradient(90deg, color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px),
-                linear-gradient(color-mix(in srgb, var(--accent) 10%, transparent) 1px, transparent 1px);
+                linear-gradient(90deg, color-mix(in srgb, var(--primary) 8%, transparent) 1px, transparent 1px),
+                linear-gradient(color-mix(in srgb, var(--primary) 8%, transparent) 1px, transparent 1px);
             background-size: 60px 60px;
         }
         
         .dark body {
             background-image: 
-                linear-gradient(90deg, color-mix(in srgb, var(--accent) 14%, transparent) 1px, transparent 1px),
-                linear-gradient(color-mix(in srgb, var(--accent) 14%, transparent) 1px, transparent 1px);
+                linear-gradient(90deg, color-mix(in srgb, var(--primary) 10%, transparent) 1px, transparent 1px),
+                linear-gradient(color-mix(in srgb, var(--primary) 10%, transparent) 1px, transparent 1px);
         }
         
         /* Glassmorphism for cards */
         .glass {
             backdrop-filter: blur(8px);
             background-color: color-mix(in srgb, var(--card) 82%, transparent) !important;
+            box-shadow: var(--shadow-sm);
         }
         
         /* Progress bar animation */
@@ -201,7 +265,7 @@
         
         .progress-fill {
             @apply h-full rounded transition-all duration-500;
-            background-color: var(--accent) !important;
+            background-color: var(--primary) !important;
         }
         
         /* Timeline styles */
@@ -212,14 +276,14 @@
         .timeline-item::before {
             content: '';
             @apply absolute left-0 top-0 w-4 h-4 rounded-full border-4;
-            background-color: var(--accent);
+            background-color: var(--primary);
             border-color: var(--background);
         }
         
         .timeline-item::after {
             content: '';
             @apply absolute left-1.5 top-4 w-0.5 h-full opacity-30;
-            background-color: var(--accent);
+            background-color: var(--primary);
         }
         
         .timeline-item:last-child::after {
@@ -231,7 +295,7 @@
             @apply p-4 rounded border-l-4 overflow-x-auto font-mono text-sm;
             background-color: var(--popover);
             color: var(--popover-foreground);
-            border-color: var(--accent);
+            border-color: var(--primary);
         }
         
         .code-block code {
@@ -251,8 +315,8 @@
         /* Button styles */
         .btn-accent {
             @apply inline-flex items-center gap-2 px-4 py-2 border-2 rounded-lg font-mono text-sm transition-all duration-300;
-            border-color: var(--accent);
-            color: var(--accent);
+            border-color: var(--primary);
+            color: var(--primary);
         }
         
         .btn-primary {
@@ -262,8 +326,8 @@
         }
 
         .btn-accent:hover {
-            background-color: var(--accent) !important;
-            color: var(--accent-foreground) !important;
+            background-color: var(--primary) !important;
+            color: var(--primary-foreground) !important;
         }
 
         .btn-primary:hover {
@@ -276,15 +340,22 @@
         }
         
         /* Profile image animation */
+        .profile-frame {
+            @apply relative p-3 rounded-3xl;
+            background: color-mix(in srgb, var(--card) 92%, transparent);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+        }
+
         .profile-image {
-            @apply w-48 h-48 rounded-2xl object-cover ring-4 animate-float;
-            --tw-ring-color: color-mix(in srgb, var(--accent) 45%, transparent);
-            filter: drop-shadow(0 0 30px color-mix(in srgb, var(--accent) 45%, transparent));
-            animation: float 3s ease-in-out infinite, glow 3s ease-in-out infinite;
+            @apply w-56 h-56 md:w-64 md:h-64 rounded-2xl object-cover ring-2;
+            --tw-ring-color: color-mix(in srgb, var(--primary) 28%, transparent);
+            filter: drop-shadow(0 4px 14px color-mix(in srgb, var(--foreground) 16%, transparent));
+            animation: float 6s ease-in-out infinite;
         }
         
         .profile-image:hover {
-            filter: drop-shadow(0 0 50px color-mix(in srgb, var(--accent) 70%, transparent));
+            filter: drop-shadow(0 8px 22px color-mix(in srgb, var(--foreground) 22%, transparent));
         }
         
         /* Staggered animation for skill cards */
@@ -395,8 +466,8 @@
                 <a href="#contact" class="text-sm hover:text-cyan-500">Contact</a>
             </div>
             
-            <button id="theme-toggle" class="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors">
-                <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+            <button id="theme-toggle" class="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors border border-slate-200 dark:border-slate-700">
+                <svg id="sun-icon" class="w-5 h-5 text-cyan-500 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l-2.83-2.83a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 001.414-1.414M2.93 12.93a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 001.414-1.414L2.93 12.93z" clip-rule="evenodd"></path>
                 </svg>
                 <svg id="moon-icon" class="w-5 h-5 text-slate-400 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
@@ -407,19 +478,20 @@
     </nav>
     
     <!-- ============ HERO SECTION ============ -->
-    <section id="hero" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <section id="hero" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <div class="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
             <!-- Text Content -->
             <div class="space-y-6 animate-fade-in-up">
                 <div>
-                    <h1 class="text-5xl md:text-6xl font-bold mb-3">Tanish Gamare</h1>
+                    <p class="font-mono text-xs tracking-[0.18em] uppercase mb-3 text-slate-500 dark:text-slate-400">Developer Portfolio</p>
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-3">Tanish Gamare</h1>
                     <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
                         A B.Sc. IT student from Mumbai building things with Python. Currently learning Docker & exploring the edge between data + systems.
                     </p>
                 </div>
                 
                 <!-- Currently Building -->
-                <div class="bg-cyan-50 dark:bg-slate-800/50 border-l-4 border-cyan-500 p-4 rounded animate-pulse">
+                <div class="bg-cyan-50 dark:bg-slate-800/50 border-l-4 border-cyan-500 p-4 rounded-lg">
                     <div class="font-mono text-sm text-cyan-600 dark:text-cyan-400 font-semibold">Currently Building:</div>
                     <div class="font-mono text-sm text-slate-700 dark:text-slate-300 mt-1">
                         Docker deep dive • MongoDB • React patterns
@@ -467,11 +539,9 @@
             </div>
             
             <!-- Profile Image -->
-            <div class="flex justify-center items-center md:order-last">
-                <div class="relative">
-                    <!-- Animated background circles -->
-                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-orange-500/20 rounded-3xl blur-3xl animate-pulse"></div>
-                    <img src="ichigoat.jpeg" alt="Tanish - Developer with headphones" class="profile-image relative z-10 shadow-2xl">
+            <div class="flex justify-center items-center md:justify-end md:order-last">
+                <div class="profile-frame">
+                    <img src="ichigoat.jpeg" alt="Tanish profile picture" class="profile-image relative z-10">
                 </div>
             </div>
         </div>
@@ -935,7 +1005,7 @@ Audio (Web Audio API singleton)</pre>
                         </div>
                     </div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Quick description (1-2 sentences) of what this project does.</p>
-                    <div class="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="flex gap-3 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                         <a href="#" class="btn-accent text-xs">View</a>
                         <a href="#" class="btn-accent text-xs">Code</a>
                     </div>
@@ -953,7 +1023,7 @@ Audio (Web Audio API singleton)</pre>
                         </div>
                     </div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Quick description (1-2 sentences) of what this project does.</p>
-                    <div class="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="flex gap-3 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                         <a href="#" class="btn-accent text-xs">View</a>
                         <a href="#" class="btn-accent text-xs">Code</a>
                     </div>
@@ -971,7 +1041,7 @@ Audio (Web Audio API singleton)</pre>
                         </div>
                     </div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Quick description (1-2 sentences) of what this project does.</p>
-                    <div class="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="flex gap-3 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                         <a href="#" class="btn-accent text-xs">View</a>
                         <a href="#" class="btn-accent text-xs">Code</a>
                     </div>
@@ -1012,7 +1082,7 @@ Audio (Web Audio API singleton)</pre>
                     <h4 class="font-bold mb-1 group-hover:text-cyan-500 transition-colors">Why HTML5 Drag API Sucks</h4>
                     <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-3">(5 min read)</div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">A brief rant on why I rewrote BRUTASK's drag-and-drop with mouse events instead.</p>
-                    <a href="#" class="btn-accent text-xs opacity-0 group-hover:opacity-100 transition-opacity">Read →</a>
+                    <a href="#" class="btn-accent text-xs opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">Read →</a>
                 </div>
                 
                 <!-- Post 2 -->
@@ -1020,7 +1090,7 @@ Audio (Web Audio API singleton)</pre>
                     <h4 class="font-bold mb-1 group-hover:text-cyan-500 transition-colors">React State Management: The Hard Way</h4>
                     <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-3">(7 min read)</div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Lessons learned building BRUTASK v2 and fixing theme switching across component trees.</p>
-                    <a href="#" class="btn-accent text-xs opacity-0 group-hover:opacity-100 transition-opacity">Read →</a>
+                    <a href="#" class="btn-accent text-xs opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">Read →</a>
                 </div>
                 
                 <!-- Post 3 -->
@@ -1028,7 +1098,7 @@ Audio (Web Audio API singleton)</pre>
                     <h4 class="font-bold mb-1 group-hover:text-cyan-500 transition-colors">Building BRUTASK: Lessons Learned</h4>
                     <div class="text-xs text-slate-500 dark:text-slate-400 font-mono mb-3">(6 min read)</div>
                     <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">A deep dive into the architecture, design decisions, and challenges of building a production Pomodoro app.</p>
-                    <a href="#" class="btn-accent text-xs opacity-0 group-hover:opacity-100 transition-opacity">Read →</a>
+                    <a href="#" class="btn-accent text-xs opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">Read →</a>
                 </div>
             </div>
         </div>
@@ -1198,18 +1268,6 @@ Audio (Web Audio API singleton)</pre>
                 }
             });
         }, 100);
-        
-        // Parallax effect on hero section
-        const heroSection = document.getElementById('hero');
-        window.addEventListener('scroll', () => {
-            if (heroSection) {
-                const scrollY = window.scrollY;
-                const elements = heroSection.querySelectorAll('.profile-image');
-                elements.forEach(el => {
-                    el.style.transform = `translateY(${scrollY * 0.3}px)`;
-                });
-            }
-        });
         
         // Add interactive glow effect to buttons on hover
         const buttons = document.querySelectorAll('.btn-accent, .btn-primary');
