@@ -200,6 +200,45 @@
             outline-offset: 2px;
         }
 
+        /* Pretext-inspired heading treatment */
+        .pretext-title {
+            position: relative;
+            display: inline-block;
+            text-wrap: balance;
+        }
+
+        .pretext-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.35rem;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: pretextLine 3.4s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes pretextLine {
+            0%, 100% { transform: scaleX(0.2); opacity: 0.35; }
+            50% { transform: scaleX(1); opacity: 0.95; }
+        }
+
+        /* Motion toggle state */
+        html.animations-off * {
+            animation: none !important;
+            transition-duration: 0ms !important;
+            scroll-behavior: auto !important;
+        }
+
+        html.animations-off .timeline-item,
+        html.animations-off .project-card,
+        html.animations-off .skill-card,
+        html.animations-off section {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
         /* Tailwind class bridges for consistent tokenized palette */
         .text-slate-900, .text-slate-700, .dark .dark\:text-slate-100, .dark .dark\:text-slate-300 {
             color: var(--foreground) !important;
@@ -466,14 +505,19 @@
                 <a href="#contact" class="text-sm hover:text-cyan-500">Contact</a>
             </div>
             
-            <button id="theme-toggle" class="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors border border-slate-200 dark:border-slate-700">
-                <svg id="sun-icon" class="w-5 h-5 text-cyan-500 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l-2.83-2.83a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 001.414-1.414M2.93 12.93a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 001.414-1.414L2.93 12.93z" clip-rule="evenodd"></path>
-                </svg>
-                <svg id="moon-icon" class="w-5 h-5 text-slate-400 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                </svg>
-            </button>
+            <div class="flex items-center gap-2">
+                <button id="animation-toggle" class="px-2.5 py-1.5 text-xs font-mono hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors border border-slate-200 dark:border-slate-700" aria-pressed="true">
+                    <span id="animation-toggle-label">Motion: On</span>
+                </button>
+                <button id="theme-toggle" class="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg transition-colors border border-slate-200 dark:border-slate-700">
+                    <svg id="sun-icon" class="w-5 h-5 text-cyan-500 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l-2.83-2.83a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 001.414-1.414M2.93 12.93a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 001.414-1.414L2.93 12.93z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-slate-400 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </nav>
     
@@ -484,7 +528,7 @@
             <div class="space-y-6 animate-fade-in-up">
                 <div>
                     <p class="font-mono text-xs tracking-[0.18em] uppercase mb-3 text-slate-500 dark:text-slate-400">Developer Portfolio</p>
-                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-3">Tanish Gamare</h1>
+                    <h1 class="pretext-title text-4xl md:text-5xl font-bold leading-tight mb-3" data-pretext="Tanish Gamare">Tanish Gamare</h1>
                     <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
                         A B.Sc. IT student from Mumbai building things with Python. Currently learning Docker & exploring the edge between data + systems.
                     </p>
@@ -1190,6 +1234,8 @@ Audio (Web Audio API singleton)</pre>
     <script>
         // Dark mode toggle
         const themeToggle = document.getElementById('theme-toggle');
+        const animationToggle = document.getElementById('animation-toggle');
+        const animationToggleLabel = document.getElementById('animation-toggle-label');
         const htmlElement = document.documentElement;
         
         // Check localStorage for theme preference
@@ -1199,6 +1245,20 @@ Audio (Web Audio API singleton)</pre>
         } else {
             htmlElement.classList.add('dark');
         }
+
+        const applyMotionPreference = (mode) => {
+            const isOff = mode === 'off';
+            htmlElement.classList.toggle('animations-off', isOff);
+            if (animationToggleLabel) {
+                animationToggleLabel.textContent = isOff ? 'Motion: Off' : 'Motion: On';
+            }
+            if (animationToggle) {
+                animationToggle.setAttribute('aria-pressed', String(!isOff));
+            }
+        };
+
+        const savedMotion = localStorage.getItem('motion') || 'on';
+        applyMotionPreference(savedMotion);
         
         themeToggle.addEventListener('click', () => {
             const isDark = htmlElement.classList.contains('dark');
@@ -1210,6 +1270,53 @@ Audio (Web Audio API singleton)</pre>
                 localStorage.setItem('theme', 'dark');
             }
         });
+
+        if (animationToggle) {
+            animationToggle.addEventListener('click', () => {
+                const nextMode = htmlElement.classList.contains('animations-off') ? 'on' : 'off';
+                localStorage.setItem('motion', nextMode);
+                applyMotionPreference(nextMode);
+                runPretextAnimation();
+            });
+        }
+
+        let pretextTimer = null;
+        const runPretextAnimation = () => {
+            const heading = document.querySelector('[data-pretext]');
+            if (!heading) return;
+
+            const finalText = heading.getAttribute('data-pretext') || heading.textContent.trim();
+            if (htmlElement.classList.contains('animations-off')) {
+                heading.textContent = finalText;
+                if (pretextTimer) {
+                    clearInterval(pretextTimer);
+                    pretextTimer = null;
+                }
+                return;
+            }
+
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let frame = 0;
+            if (pretextTimer) clearInterval(pretextTimer);
+
+            pretextTimer = setInterval(() => {
+                heading.textContent = finalText
+                    .split('')
+                    .map((ch, idx) => {
+                        if (ch === ' ') return ' ';
+                        if (idx < frame) return finalText[idx];
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join('');
+
+                frame += 0.5;
+                if (frame >= finalText.length) {
+                    clearInterval(pretextTimer);
+                    pretextTimer = null;
+                    heading.textContent = finalText;
+                }
+            }, 28);
+        };
         
         // Contact form handler
         const contactForm = document.getElementById('contact-form');
@@ -1237,6 +1344,12 @@ Audio (Web Audio API singleton)</pre>
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
                     const element = entry.target;
+                    if (htmlElement.classList.contains('animations-off')) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'none';
+                        observer.unobserve(element);
+                        return;
+                    }
                     if (element.classList.contains('timeline-item')) {
                         element.style.animation = `slideInLeft 0.6s ease-out ${index * 0.1}s forwards`;
                     } else if (element.classList.contains('project-card')) {
@@ -1260,6 +1373,10 @@ Audio (Web Audio API singleton)</pre>
         // Immediately animate skills on page load if already visible
         setTimeout(() => {
             document.querySelectorAll('.skill-card').forEach((el, index) => {
+                if (htmlElement.classList.contains('animations-off')) {
+                    el.style.opacity = '1';
+                    return;
+                }
                 const rect = el.getBoundingClientRect();
                 if (rect.top < window.innerHeight && !el.style.animation) {
                     const parent = el.parentElement;
@@ -1333,9 +1450,17 @@ Audio (Web Audio API singleton)</pre>
         
         // Add fade-in animation to all sections
         window.addEventListener('load', () => {
-            document.querySelectorAll('section').forEach((section, index) => {
-                section.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s both`;
-            });
+            if (htmlElement.classList.contains('animations-off')) {
+                document.querySelectorAll('section').forEach((section) => {
+                    section.style.animation = 'none';
+                    section.style.opacity = '1';
+                });
+            } else {
+                document.querySelectorAll('section').forEach((section, index) => {
+                    section.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s both`;
+                });
+            }
+            runPretextAnimation();
         });
     </script>
 </body>
