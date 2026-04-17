@@ -66,6 +66,11 @@
             }
         }
     </script>
+    <script type="module">
+        import { prepare, layout } from "https://cdn.jsdelivr.net/npm/@chenglou/pretext@0.0.5/dist/layout.js";
+        window.pretextApi = { prepare, layout };
+        window.dispatchEvent(new Event("pretext-ready"));
+    </script>
     
     <style>
         :root {
@@ -224,6 +229,40 @@
             50% { transform: scaleX(1); opacity: 0.95; }
         }
 
+        @keyframes textEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+                filter: blur(2px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .text-animated-target {
+            opacity: 0;
+            will-change: transform, opacity, filter;
+        }
+
+        .text-animated-target.is-visible {
+            animation: textEntrance var(--text-duration, 700ms) cubic-bezier(0.2, 0.8, 0.2, 1) both;
+            animation-delay: var(--text-delay, 0ms);
+        }
+
+        .magnify-on-hover {
+            transform-origin: left center;
+            transition: transform 220ms ease, color 220ms ease;
+        }
+
+        #skills .magnify-on-hover:hover,
+        #timeline .magnify-on-hover:hover,
+        #about .magnify-on-hover:hover {
+            transform: scale(1.065);
+        }
+
         /* Motion toggle state */
         html.animations-off * {
             animation: none !important;
@@ -236,6 +275,16 @@
         html.animations-off .skill-card,
         html.animations-off section {
             opacity: 1 !important;
+            transform: none !important;
+        }
+
+        html.animations-off .text-animated-target {
+            opacity: 1 !important;
+            filter: none !important;
+            transform: none !important;
+        }
+
+        html.animations-off .magnify-on-hover:hover {
             transform: none !important;
         }
 
@@ -494,7 +543,7 @@
     
     <!-- ============ NAVBAR ============ -->
     <nav class="sticky top-0 z-50 glass border-b border-slate-200 dark:border-slate-700">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <div class="text-xl font-bold">Tanish</div>
             
             <div class="hidden md:flex items-center gap-8">
@@ -592,7 +641,7 @@
     </section>
     
     <!-- ============ ABOUT SECTION ============ -->
-    <section id="about" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
+    <section id="about" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
         <div class="space-y-8">
             <div>
                 <h2 class="text-3xl font-bold mb-4">Turning curiosity into code</h2>
@@ -648,7 +697,7 @@
     </section>
     
     <!-- ============ SKILLS SECTION ============ -->
-    <section id="skills" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
+    <section id="skills" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
         <h2 class="text-3xl font-bold mb-12">Skills & Progression</h2>
         
         <div class="space-y-12">
@@ -855,7 +904,7 @@
     </section>
     
     <!-- ============ LEARNING TIMELINE ============ -->
-    <section id="timeline" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
+    <section id="timeline" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
         <h2 class="text-3xl font-bold mb-12">Learning Arc (Last 6 Months)</h2>
         
         <div class="space-y-8">
@@ -898,7 +947,7 @@
     </section>
     
     <!-- ============ PROJECTS SECTION ============ -->
-    <section id="projects" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
+    <section id="projects" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
         <h2 class="text-3xl font-bold mb-12">Projects</h2>
         
         <!-- FEATURED PROJECTS -->
@@ -1095,7 +1144,7 @@ Audio (Web Audio API singleton)</pre>
     </section>
     
     <!-- ============ BLOG / LEARNINGS SECTION ============ -->
-    <section id="blog" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
+    <section id="blog" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
         <h2 class="text-3xl font-bold mb-12">Learnings & Insights</h2>
         
         <!-- Featured Post -->
@@ -1149,7 +1198,7 @@ Audio (Web Audio API singleton)</pre>
     </section>
     
     <!-- ============ CONTACT / HIRE ME SECTION ============ -->
-    <section id="contact" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
+    <section id="contact" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-700">
         <h2 class="text-3xl font-bold mb-8">Let's Build Something Together</h2>
         
         <p class="text-slate-600 dark:text-slate-400 mb-8 max-w-2xl">
@@ -1211,7 +1260,7 @@ Audio (Web Audio API singleton)</pre>
     
     <!-- ============ FOOTER ============ -->
     <footer class="border-t border-slate-200 dark:border-slate-700 mt-16 py-8">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div class="font-mono text-sm text-slate-500 dark:text-slate-400">
                     © 2026 Tanish Gamare. All rights reserved.
@@ -1255,6 +1304,11 @@ Audio (Web Audio API singleton)</pre>
             if (animationToggle) {
                 animationToggle.setAttribute('aria-pressed', String(!isOff));
             }
+            if (isOff) {
+                document.querySelectorAll('.text-animated-target').forEach((el) => {
+                    el.classList.add('is-visible');
+                });
+            }
         };
 
         const savedMotion = localStorage.getItem('motion') || 'on';
@@ -1277,6 +1331,10 @@ Audio (Web Audio API singleton)</pre>
                 localStorage.setItem('motion', nextMode);
                 applyMotionPreference(nextMode);
                 runPretextAnimation();
+                if (nextMode === 'on') {
+                    applyPretextLayoutEffects();
+                    document.querySelectorAll('.text-animated-target:not(.is-visible)').forEach((el) => textObserver.observe(el));
+                }
             });
         }
 
@@ -1317,6 +1375,62 @@ Audio (Web Audio API singleton)</pre>
                 }
             }, 28);
         };
+
+        const textSelector = 'h1, h2, h3, h4, p, label, li, .font-mono, .timeline-item > div, .skill-card a, .skill-card p, .skill-card span';
+
+        const initializeTextAnimationTargets = () => {
+            document.querySelectorAll(textSelector).forEach((el) => {
+                if (el.closest('script, style')) return;
+                if (el.textContent && el.textContent.trim().length > 0) {
+                    el.classList.add('text-animated-target');
+                }
+                if (el.closest('#skills') || el.closest('#timeline') || el.closest('#about .space-y-3')) {
+                    el.classList.add('magnify-on-hover');
+                }
+            });
+        };
+
+        const applyPretextLayoutEffects = () => {
+            if (!window.pretextApi) return;
+            const targets = document.querySelectorAll('.text-animated-target');
+            targets.forEach((el, idx) => {
+                const text = (el.textContent || '').trim();
+                if (!text) return;
+
+                const style = getComputedStyle(el);
+                const font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+                const lineHeight = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.4;
+                const maxWidth = Math.max(el.clientWidth, 40);
+
+                try {
+                    const prepared = window.pretextApi.prepare(text, font);
+                    const measured = window.pretextApi.layout(prepared, maxWidth, lineHeight);
+                    const lineCount = Math.max(1, measured.lineCount || 1);
+                    const baseDelay = (idx % 12) * 24;
+                    el.style.setProperty('--text-duration', `${560 + lineCount * 130}ms`);
+                    el.style.setProperty('--text-delay', `${baseDelay}ms`);
+                } catch (_err) {
+                    el.style.setProperty('--text-duration', '700ms');
+                    el.style.setProperty('--text-delay', `${(idx % 10) * 20}ms`);
+                }
+            });
+        };
+
+        const textObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const el = entry.target;
+                if (htmlElement.classList.contains('animations-off')) {
+                    el.classList.add('is-visible');
+                    textObserver.unobserve(el);
+                    return;
+                }
+
+                if (entry.isIntersecting) {
+                    el.classList.add('is-visible');
+                    textObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -10% 0px' });
         
         // Contact form handler
         const contactForm = document.getElementById('contact-form');
@@ -1368,6 +1482,20 @@ Audio (Web Audio API singleton)</pre>
         // Observe all animatable elements
         document.querySelectorAll('.timeline-item, .project-card, .skill-card').forEach(el => {
             observer.observe(el);
+        });
+
+        initializeTextAnimationTargets();
+        applyPretextLayoutEffects();
+        document.querySelectorAll('.text-animated-target').forEach((el) => textObserver.observe(el));
+
+        window.addEventListener('pretext-ready', () => {
+            applyPretextLayoutEffects();
+        });
+
+        window.addEventListener('resize', () => {
+            if (!htmlElement.classList.contains('animations-off')) {
+                applyPretextLayoutEffects();
+            }
         });
         
         // Immediately animate skills on page load if already visible
