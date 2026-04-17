@@ -329,6 +329,86 @@
             }
         }
 
+        .layout-separator {
+            position: relative;
+            height: 34px;
+            max-width: 70rem;
+            margin: 0.25rem auto;
+        }
+
+        .layout-separator::before {
+            content: "";
+            position: absolute;
+            inset: 50% 0 auto 0;
+            height: 1px;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .layout-separator::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            transform: translate(-50%, -50%) rotate(45deg);
+            border: 1px solid var(--primary);
+            background: color-mix(in srgb, var(--card) 88%, transparent);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .marquee-band {
+            position: relative;
+            max-width: 76rem;
+            margin: 0.25rem auto;
+            border: 1px solid var(--border);
+            border-radius: calc(var(--radius) + 0.35rem);
+            background: color-mix(in srgb, var(--card) 90%, transparent);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeSlide 24s linear infinite;
+            will-change: transform;
+        }
+
+        .marquee-band.marquee-reverse .marquee-track {
+            animation-direction: reverse;
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.72rem 1.25rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            color: var(--muted-foreground);
+            font-family: var(--font-mono);
+        }
+
+        .marquee-item::before {
+            content: "◆";
+            color: var(--primary);
+            font-size: 0.68rem;
+            opacity: 0.85;
+        }
+
+        @keyframes marqueeSlide {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
         /* Tailwind class bridges for consistent tokenized palette */
         .text-slate-900, .text-slate-700, .dark .dark\:text-slate-100, .dark .dark\:text-slate-300 {
             color: var(--foreground) !important;
@@ -681,6 +761,19 @@
             </div>
         </div>
     </section>
+
+    <div class="marquee-band" aria-hidden="true">
+        <div class="marquee-track">
+            <span class="marquee-item">Building practical products</span>
+            <span class="marquee-item">Learning in public</span>
+            <span class="marquee-item">Python + systems focus</span>
+            <span class="marquee-item">Open to collaboration</span>
+            <span class="marquee-item">Building practical products</span>
+            <span class="marquee-item">Learning in public</span>
+            <span class="marquee-item">Python + systems focus</span>
+            <span class="marquee-item">Open to collaboration</span>
+        </div>
+    </div>
     
     <!-- ============ ABOUT SECTION ============ -->
     <section id="about" class="layout-section max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -739,6 +832,8 @@
             </div>
         </div>
     </section>
+
+    <div class="layout-separator" aria-hidden="true"></div>
     
     <!-- ============ SKILLS SECTION ============ -->
     <section id="skills" class="layout-section max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -946,6 +1041,19 @@
             </div>
         </div>
     </section>
+
+    <div class="marquee-band marquee-reverse" aria-hidden="true">
+        <div class="marquee-track">
+            <span class="marquee-item">Git and GitHub workflow</span>
+            <span class="marquee-item">Docker and Linux</span>
+            <span class="marquee-item">Data tools: Pandas and Matplotlib</span>
+            <span class="marquee-item">Clean UI with HTML and CSS</span>
+            <span class="marquee-item">Git and GitHub workflow</span>
+            <span class="marquee-item">Docker and Linux</span>
+            <span class="marquee-item">Data tools: Pandas and Matplotlib</span>
+            <span class="marquee-item">Clean UI with HTML and CSS</span>
+        </div>
+    </div>
     
     <!-- ============ LEARNING TIMELINE ============ -->
     <section id="timeline" class="layout-section max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -996,6 +1104,8 @@
         </div>
         </div>
     </section>
+
+    <div class="layout-separator" aria-hidden="true"></div>
     
     <!-- ============ PROJECTS SECTION ============ -->
     <section id="projects" class="layout-section max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -1195,6 +1305,19 @@ Audio (Web Audio API singleton)</pre>
         </div>
         </div>
     </section>
+
+    <div class="marquee-band" aria-hidden="true">
+        <div class="marquee-track">
+            <span class="marquee-item">Shipped projects</span>
+            <span class="marquee-item">Iterative design</span>
+            <span class="marquee-item">Readable code and clean UX</span>
+            <span class="marquee-item">Performance minded builds</span>
+            <span class="marquee-item">Shipped projects</span>
+            <span class="marquee-item">Iterative design</span>
+            <span class="marquee-item">Readable code and clean UX</span>
+            <span class="marquee-item">Performance minded builds</span>
+        </div>
+    </div>
     
     <!-- ============ BLOG / LEARNINGS SECTION ============ -->
     <section id="blog" class="layout-section max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -1251,6 +1374,8 @@ Audio (Web Audio API singleton)</pre>
         </div>
         </div>
     </section>
+
+    <div class="layout-separator" aria-hidden="true"></div>
     
     <!-- ============ CONTACT / HIRE ME SECTION ============ -->
     <section id="contact" class="layout-section max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
